@@ -1,0 +1,66 @@
+{
+  "_source": "Seeded from .agents/prompts/update-orca.md, corrected against .agents/research/model-priority-findings.md (DeepSWE v1.1 + Artificial Analysis). Ranked on capability per dollar, not raw capability.",
+  "harnessOrder": ["claude", "pi", "opencode", "prime-agent", "copilot", "codex", "agy"],
+  "modelOrder": {
+    "anthropic": {
+      "orchestrationWorker": [
+        {"model": "claude-opus-5", "effort": "medium"},
+        {"model": "claude-opus-5", "effort": "high"},
+        {"model": "claude-fable-5", "effort": "max"},
+        {"model": "claude-sonnet-5", "effort": "high"}
+      ],
+      "subagent": [
+        {"model": "claude-opus-5", "effort": "low"},
+        {"model": "claude-opus-5", "effort": "medium"},
+        {"model": "claude-sonnet-5", "effort": "low"}
+      ],
+      "subagentSimple": [
+        {"model": "claude-haiku-4-5", "effort": null},
+        {"model": "claude-opus-5", "effort": "low"},
+        {"model": "claude-sonnet-5", "effort": "low"}
+      ]
+    },
+    "github-copilot": {
+      "orchestrationWorker": [
+        {"model": "gpt-5.6-sol", "effort": "high"},
+        {"model": "gpt-5.6-sol", "effort": "xhigh"},
+        {"model": "claude-opus-5", "effort": "medium"},
+        {"model": "kimi-k3", "effort": "max"}
+      ],
+      "subagent": [
+        {"model": "gpt-5.6-luna", "effort": "max"},
+        {"model": "gpt-5.6-terra", "effort": "max"},
+        {"model": "gemini-3.7-flash", "effort": "medium"},
+        {"model": "grok-4.6", "effort": "medium"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-5.6-luna", "effort": "xhigh"},
+        {"model": "gpt-5.6-luna", "effort": "high"},
+        {"model": "claude-haiku-4-5", "effort": null}
+      ]
+    },
+    "openai-codex": {
+      "orchestrationWorker": [
+        {"model": "gpt-5.6-sol", "effort": "high"},
+        {"model": "gpt-5.6-sol", "effort": "xhigh"},
+        {"model": "gpt-5.6-terra", "effort": "max"}
+      ],
+      "subagent": [
+        {"model": "gpt-5.6-luna", "effort": "max"},
+        {"model": "gpt-5.6-terra", "effort": "max"},
+        {"model": "gpt-5.6-sol", "effort": "medium"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-5.6-luna", "effort": "xhigh"},
+        {"model": "gpt-5.6-luna", "effort": "high"},
+        {"model": "gpt-5.6-terra", "effort": "high"}
+      ]
+    }
+  },
+  "cautions": [
+    "GPT-5.6 Luna collapses below xhigh (medium 11%, low 2%) — never offer Luna under high.",
+    "Claude Sonnet 5 is dominated by Claude Opus 5 at every effort level on both score and cost; keep it as quota-relief only.",
+    "Claude Haiku 4.5 has an Agentic Index of 16.5 — safe for mechanical work, not for code edits.",
+    "Grok 4.6 medium (67%) beats Grok 4.6 high (65%); do not raise its effort."
+  ]
+}

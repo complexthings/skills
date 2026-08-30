@@ -1,0 +1,40 @@
+{
+  "name": "adhd-friendly",
+  "displayName": "ADHD Friendly",
+  "description": "Keeps replies short, actionable and consistently shaped: a per-prompt Reply Card, a silent Reply Meter, and a bundled ADHD output style.",
+  "version": "0.1.0",
+  "author": {
+    "name": "complexthings",
+    "url": "https://github.com/complexthings"
+  },
+  "homepage": "https://github.com/complexthings/skills",
+  "repository": "https://github.com/complexthings/skills",
+  "license": "MIT",
+  "keywords": [
+    "adhd",
+    "output-style",
+    "hooks",
+    "brevity",
+    "token-reduction"
+  ],
+  "userConfig": {
+    "cardTiers": {
+      "type": "string",
+      "title": "Card tier thresholds",
+      "description": "Reply Card tier thresholds as \"oneLine,full\" word counts. A prompt of oneLine words or fewer gets the one-line card; a question, or a prompt longer than full words, gets the whole card; anything else gets the shape half.",
+      "default": "6,12"
+    },
+    "meter": {
+      "type": "boolean",
+      "title": "Reply meter",
+      "description": "Score each finished reply and log it to meter.log. Off means the Stop hook logs nothing and the next card carries no violation line.",
+      "default": true
+    },
+    "strictness": {
+      "type": "string",
+      "title": "Meter strictness",
+      "description": "How hard the meter scores: \"lenient\" counts only the shape rules, \"normal\" counts the full STE set, \"strict\" adds the house spelling and dash counts.",
+      "default": "normal"
+    }
+  }
+}

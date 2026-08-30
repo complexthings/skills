@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "complexthings-skills",
+  "description": "Complexthings plugins for Claude Code: workstream orchestration helpers and ADHD-friendly reply shaping.",
+  "owner": {
+    "name": "complexthings"
+  },
+  "plugins": [
+    {
+      "name": "orca",
+      "source": "./orca",
+      "description": "Orca Helpers and Utilities to prepare workflows for execution and orchestration.",
+      "skills": [
+        "./orca-prompt"
+      ]
+    },
+    {
+      "name": "adhd-friendly",
+      "source": "./adhd-friendly",
+      "description": "Keeps replies short, actionable and consistently shaped: a per-prompt Reply Card, a silent Reply Meter, and a bundled ADHD output style.",
+      "skills": [
+        "./skills/adhd-stats"
+      ]
+    }
+  ]
+}
