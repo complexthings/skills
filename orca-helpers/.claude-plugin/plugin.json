@@ -1,0 +1,21 @@
+{
+  "name": "orca-helpers",
+  "displayName": "Orca Helpers",
+  "description": "Plans, configures and schedules Orca Workstreams, turning a rough idea into prompt files an orchestrator can run.",
+  "version": "0.2.0",
+  "author": {
+    "name": "complexthings",
+    "url": "https://github.com/complexthings"
+  },
+  "homepage": "https://github.com/complexthings/skills",
+  "repository": "https://github.com/complexthings/skills",
+  "license": "MIT",
+  "keywords": [
+    "orca",
+    "orchestration",
+    "workstream",
+    "multi-agent",
+    "prompts",
+    "scheduling"
+  ]
+}
