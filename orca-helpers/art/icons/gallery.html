@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icon Options</title>
+<style>
+  body { margin: 0; padding: 16px; font: 14px/1.4 system-ui, sans-serif; background: #f4f4f4; color: #222; }
+  h1 { margin: 0 0 4px; }
+  h2 { margin: 32px 0 8px; text-transform: capitalize; }
+  .options { display: flex; flex-wrap: wrap; gap: 12px; }
+  .card { background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: 8px; }
+  .card h3 { margin: 0 0 6px; font-size: 14px; }
+  .bgs { display: flex; gap: 6px; }
+  .bg { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 4px; }
+  .dark { background: #1e1e1e; }
+  .light { background: #ffffff; border: 1px solid #ddd; }
+  img { image-rendering: pixelated; display: block; }
+  .strip { margin-top: 6px; background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 8px 8px; }
+</style>
+</head>
+<body>
+<h1>Icon Options</h1>
+<p>Each option on a dark and a light background, at 1x and 4x. Animated options play as GIFs; the strip below shows every frame of the PNG.</p>
+<div id="gallery"></div>
+<script>
+  // [type, size, option count, animated]
+  const TYPES = [
+    ['wave', 18, 9, true],
+    ['check', 18, 5, false],
+    ['upcoming', 18, 5, false],
+    ['flag', 18, 5, true],
+    ['orca', 24, 5, true],
+  ]
+  // extra card labels; wave_6..9 are the breaking-wave redraw
+  const LABELS = {
+    wave_6: 'breaker',
+    wave_7: 'breaker, line art',
+    wave_8: 'breaker, travelling',
+    wave_9: 'breaker, navy rim',
+  }
+  const img = (src, w) => `<img src="${src}" width="${w}" height="${w}" alt="">`
+  document.getElementById('gallery').innerHTML = TYPES.map(([type, size, count, animated]) => {
+    const cards = Array.from({ length: count }, (_, i) => {
+      const name = `${type}_${i + 1}`
+      const src = animated ? `out/anims/${name}.gif` : `out/sprites/${name}.png`
+      const bg = cls => `<div class="bg ${cls}">${img(src, size)}${img(src, size * 4)}</div>`
+      const strip = animated ? `<img class="strip" src="out/anims/${name}.png" height="${size * 2}" alt="">` : ''
+      return `<div class="card"><h3>${i + 1}. ${name}${LABELS[name] ? ` (${LABELS[name]})` : ''}</h3><div class="bgs">${bg('dark')}${bg('light')}</div>${strip}</div>`
+    }).join('')
+    return `<h2>${type} (${size}x${size})</h2><div class="options">${cards}</div>`
+  }).join('')
+</script>
+</body>
+</html>
