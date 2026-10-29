@@ -1,0 +1,50 @@
+{
+  "icons": {
+    "wave": "wave_9",
+    "check": "check_1",
+    "upcoming": "upcoming_4",
+    "flag": "flag_1",
+    "orca": "orca_2"
+  },
+  "iconSource": "orca-helpers/art/icons/out/",
+  "avatarStates": {
+    "default": "default_1",
+    "selected": "selected_3",
+    "main": "main_2",
+    "disabled": "disabled_2",
+    "writing": "writing_1",
+    "waiting": "waiting_2"
+  },
+  "avatarSource": "orca-helpers/art/avatars/claude/out/",
+  "avatarReview": {
+    "approved": false,
+    "approvedHarnesses": ["claude"],
+    "fixes": [
+      {
+        "harness": "copilot",
+        "fix": "Look like the GitHub Copilot mascot, not the Claude logo. Reference: a rounded dome helmet shading purple at the top to blue at the bottom; big pilot goggles pushed up on the forehead, two rounded-square lenses with lighter purple rims joined by a bridge; a dark navy rounded-rectangle face visor with a lighter blue rim; two tall cyan (#12f0f5) pill-shaped eyes; round blue ear cups on both sides of the head."
+      },
+      {
+        "harness": "opencode",
+        "fix": "Give the character two legs only."
+      },
+      {
+        "harness": "codex",
+        "fix": "Look like the Codex icon. Reference: a scalloped cloud or flower blob with about 8 rounded bumps, a vertical gradient from lavender (#b0a8ff) at the top to strong blue (#3d4bff) at the bottom, and a white terminal prompt '>_' (a rounded chevron and a rounded underscore) on its face."
+      },
+      {
+        "harness": "pi",
+        "fix": "Draw two characters side by side: a full-size avatar shaped like the letter P, and a tiny companion next to it shaped like the letter i, so together they read 'Pi'."
+      },
+      {
+        "harness": "antigravity",
+        "fix": "Look more like the Google Antigravity 'A'. Reference: a smooth arch or bell shape with no crossbar, a rounded peak, the inner opening a soft rounded arch, and the two legs flaring outward into rounded feet that curl out at the bottom. Gradient: green at the top left, red at the top right, both blending into bright blue (#3388ff) over the lower body."
+      }
+    ],
+    "note": "Keep all six Avatar States for every harness. The user reviewed review.html from PR #114."
+  },
+  "notes": [
+    "wave_1..wave_5 were rejected: the user wants a side-view breaking wave that rises, curls right, crashes with spray and flattens. wave_6..wave_9 were drawn to that brief in PR #111, and wave_9 was picked.",
+    "The prototype worker flagged that writing_1 is the least legible writing option and that the crown in main_2 is small (19px). Improve both when finishing the avatars in 07-harness-avatars."
+  ]
+}

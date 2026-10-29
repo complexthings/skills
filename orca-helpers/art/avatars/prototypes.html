@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Avatar Prototypes</title>
+<style>
+  body { margin: 0; padding: 16px; font: 14px/1.4 system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 24px 0 8px; }
+  p { margin: 0 0 16px; color: #52525b; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  figure { margin: 0; width: 336px; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; background: #fff; }
+  figcaption { padding: 6px 8px; font-weight: 600; }
+  .pair { display: flex; }
+  .bg { padding: 12px; display: grid; place-items: center; }
+  .light { background: #ffffff; }
+  .dark { background: #1e1e1e; }
+  img { width: 144px; height: 192px; image-rendering: pixelated; display: block; }
+  .strip { padding: 0 8px 8px; }
+  .strip img { width: auto; height: 64px; max-width: 100%; }
+  .strip a { font-size: 12px; color: #2563eb; }
+</style>
+</head>
+<body>
+<h1>Claude Code Harness Avatar prototypes</h1>
+<p>Pick one option per Avatar State. Each option shows on a light and a dark background at 3x. Animated options play their loop.</p>
+<main id="states"></main>
+<script>
+  const STATES = [
+    ["default", "Default", false],
+    ["selected", "Selected (dancing)", true],
+    ["main", "Main Orchestrator (crown)", true],
+    ["disabled", "Disabled (desaturated, sad)", false],
+    ["writing", "Writing", true],
+    ["waiting", "Waiting (watch)", true],
+  ];
+  const root = document.getElementById("states");
+  STATES.forEach(([key, label, animated], s) => {
+    const h = document.createElement("h2");
+    h.textContent = `${s + 1}. ${label}`;
+    const row = document.createElement("div");
+    row.className = "row";
+    for (let n = 1; n <= 3; n++) {
+      const name = `${key}_${n}`;
+      const src = animated ? `claude/out/anims/${name}.gif` : `claude/out/png/${name}.png`;
+      const fig = document.createElement("figure");
+      fig.innerHTML =
+        `<figcaption>${s + 1}.${n} &middot; ${name}</figcaption>` +
+        `<div class="pair"><div class="bg light"><img src="${src}" alt="${label} option ${n} on light"></div>` +
+        `<div class="bg dark"><img src="${src}" alt="${label} option ${n} on dark"></div></div>` +
+        (animated ? `<div class="strip"><a href="claude/out/anims/${name}.png">frame strip</a><img src="claude/out/anims/${name}.png" alt=""></div>` : "");
+      row.append(fig);
+    }
+    root.append(h, row);
+  });
+</script>
+</body>
+</html>

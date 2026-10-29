@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harness Avatars Review</title>
+<style>
+  body { margin: 0; padding: 16px; font: 14px/1.4 system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 24px 0 8px; }
+  p { margin: 0 0 16px; color: #52525b; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  figure { margin: 0; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; background: #fff; }
+  figcaption { padding: 6px 8px; font-weight: 600; }
+  .pair { display: flex; }
+  .bg { padding: 10px; display: flex; gap: 10px; align-items: end; }
+  .light { background: #ffffff; }
+  .dark { background: #1e1e1e; }
+  .av { image-rendering: pixelated; background-repeat: no-repeat; }
+  .x1 { width: 48px; height: 64px; }
+  .x2 { width: 96px; height: 128px; }
+  .strip { padding: 0 8px 8px; font-size: 12px; }
+  .strip img { display: block; height: 64px; max-width: 100%; image-rendering: pixelated; }
+  .moods { border-collapse: collapse; background: #fff; }
+  .moods th { padding: 6px 8px; text-align: left; font-size: 12px; }
+  .moods td { padding: 0; border: 1px solid #d4d4d8; }
+</style>
+</head>
+<body>
+<h1>Harness Avatars</h1>
+<p>All six Agent Harnesses in all six Avatar States, on light and dark, at 1x and 2x. Animated states play their loop; the frame strip sits under each. Files: <code>orca-helpers/hooks/assets/avatars/</code>.</p>
+<main id="harnesses"></main>
+<h1>Wave Band Avatar States</h1>
+<p>Todo, In Progress and Complete in all seven Avatar Moods, drawn by hand at 18x18 and 24x24. Each cell shows 18 then 24 at 1x and 3x, on light and dark. Files: <code>&lt;id&gt;_&lt;state&gt;_&lt;mood&gt;_&lt;size&gt;</code>.</p>
+<main id="wave"></main>
+<script type="module">
+  const HARNESSES = [["claude", "Claude Code"], ["copilot", "GitHub Copilot"], ["opencode", "OpenCode"], ["codex", "Codex"], ["pi", "Pi"], ["antigravity", "Antigravity"]];
+  // State, label, frame duration in ms (0 = still). Matches harness() in base.px.js.
+  const STATES = [["default", "Default", 0], ["selected", "Selected", 125], ["main", "Main Orchestrator", 200],
+    ["disabled", "Disabled", 0], ["writing", "Writing", 167], ["waiting", "Waiting", 250]];
+  const DIR = "../../hooks/assets/avatars/";
+  const anims = [];
+  const root = document.getElementById("harnesses");
+  for (const [id, label] of HARNESSES) {
+    const h = document.createElement("h2");
+    h.textContent = label;
+    const row = document.createElement("div");
+    row.className = "row";
+    for (const [state, sLabel, ms] of STATES) {
+      const src = `${DIR}${id}_${state}.png`;
+      const av = (scale) => `<div class="av x${scale}" role="img" aria-label="${label} ${sLabel}" style="background-image:url(${src});background-size:auto ${64 * scale}px"></div>`;
+      const cell = (bg) => `<div class="bg ${bg}">${av(1)}${av(2)}</div>`;
+      const fig = document.createElement("figure");
+      fig.innerHTML = `<figcaption>${sLabel} &middot; ${id}_${state}</figcaption><div class="pair">${cell("light")}${cell("dark")}</div>` +
+        (ms ? `<div class="strip">frame strip<img src="${src}" alt=""></div>` : "");
+      row.append(fig);
+      if (ms) {
+        const img = new Image();
+        img.onload = () => anims.push({ els: fig.querySelectorAll(".av"), frames: img.naturalWidth / 48, ms });
+        img.src = src;
+      }
+    }
+    root.append(h, row);
+  }
+  // Harnesses with Wave Band art so far; each avatars work item adds its id.
+  const WAVE = ["claude", "opencode", "copilot", "antigravity", "pi", "codex"];
+  const WAVE_STATES = [["todo", "Todo"], ["progress", "In Progress"], ["complete", "Complete"]];
+  const MOODS = ["default", "red", "blue", "green", "yellow", "purple", "teal"];
+  const wave = document.getElementById("wave");
+  // Frame durations come from export.mjs, so a redrawn strip keeps its own speed.
+  let manifest = {};
+  try { manifest = await (await fetch(`${DIR}manifest.json`)).json(); } catch {}
+  for (const id of WAVE) {
+    const h = document.createElement("h2");
+    h.textContent = HARNESSES.find(([i]) => i === id)[1];
+    const t = document.createElement("table");
+    t.className = "moods";
+    t.innerHTML = `<tr><th></th>${MOODS.map((m) => `<th>${m}</th>`).join("")}</tr>`;
+    for (const [state, sLabel] of WAVE_STATES) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<th>${sLabel}</th>`;
+      for (const mood of MOODS) {
+        const td = document.createElement("td");
+        const av = (size, scale) => { const src = `${DIR}${id}_${state}_${mood}_${size}.png`, px = size * scale;
+          return `<div class="av" role="img" aria-label="${id} ${sLabel} ${mood} ${size}" style="width:${px}px;height:${px}px;background-image:url(${src});background-size:auto ${px}px"></div>`; };
+        const cell = (bg) => `<div class="bg ${bg}">${[18, 24].map((n) => av(n, 1) + av(n, 3)).join("")}</div>`;
+        td.innerHTML = cell("light") + cell("dark");
+        for (const size of [18, 24]) {
+          const img = new Image();
+          img.onload = () => { if (img.naturalWidth > size) anims.push({ els: td.querySelectorAll(`[aria-label$=" ${size}"]`), frames: img.naturalWidth / size, ms: manifest[`${id}_${state}_${mood}_${size}`]?.ms[0] || 250 }); };
+          img.src = `${DIR}${id}_${state}_${mood}_${size}.png`;
+        }
+        tr.append(td);
+      }
+      t.append(tr);
+    }
+    wave.append(h, t);
+  }
+  const t0 = performance.now();
+  (function tick(now) {
+    for (const a of anims) {
+      const f = Math.floor((now - t0) / a.ms) % a.frames;
+      a.els.forEach((el) => { el.style.backgroundPositionX = `-${f * el.clientWidth}px`; });
+    }
+    requestAnimationFrame(tick);
+  })(t0);
+</script>
+</body>
+</html>
