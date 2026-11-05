@@ -1,0 +1,12 @@
+{
+  "name": "complexthings",
+  "owner": { "name": "complexthings" },
+  "plugins": [
+    {
+      "name": "orca-workstreams",
+      "description": "Plan and run Orca Workstreams across coding agents.",
+      "version": "0.1.0",
+      "source": "./orca-workstreams"
+    }
+  ]
+}
