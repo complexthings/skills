@@ -1,0 +1,14 @@
+{
+  "modules": ["./register.tsx"],
+  "hooks": {
+    "UserPromptSubmit": [{ "hooks": [
+      { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/prompt_gate.py\"", "timeout": 600 },
+      { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/recall_hook.py\"" }
+    ] }],
+    "SubagentStart": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/recall_hook.py\"" }] }],
+    "PostToolUse": [{ "matcher": "Bash", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/scaffold_hook.py\"" }] }],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/workstream_hook.py\"", "timeout": 60 }] }],
+    "SessionStart": [{ "matcher": "compact|resume", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/workstream_hook.py\"" }] }],
+    "PreCompact": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/workstream_hook.py\"", "timeout": 90 }] }]
+  }
+}

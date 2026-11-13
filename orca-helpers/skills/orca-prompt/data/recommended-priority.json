@@ -1,0 +1,81 @@
+{
+  "_source": "Recommended priority, ranked by hand from day-to-day use. Rewritten 2026-10-21 for Claude Opus, Sonnet and Haiku 5.5, GPT-6.1 Sol, GPT-6 Luna, Gemini 4 Argon and Gemini 3.8 Flash. `gemini-4-argon` is unconfirmed: `agy models` does not list it yet.",
+  "harnessOrder": ["claude", "pi", "opencode", "copilot", "codex", "agy"],
+  "modelOrder": {
+    "anthropic": {
+      "orchestrationWorker": [
+        {"model": "claude-opus-5-5", "effort": "medium"},
+        {"model": "claude-opus-5-5", "effort": "high"},
+        {"model": "claude-opus-5-5", "effort": "low"}
+      ],
+      "subagent": [
+        {"model": "claude-opus-5-5", "effort": "low"},
+        {"model": "claude-opus-5-5", "effort": "medium"},
+        {"model": "claude-sonnet-5-5", "effort": "medium"},
+        {"model": "claude-sonnet-5-5", "effort": "low"},
+        {"model": "claude-haiku-5-5", "effort": "high"}
+      ],
+      "subagentSimple": [
+        {"model": "claude-haiku-5-5", "effort": "medium"},
+        {"model": "claude-sonnet-5-5", "effort": "low"},
+        {"model": "claude-opus-5-5", "effort": "low"}
+      ]
+    },
+    "github-copilot": {
+      "orchestrationWorker": [
+        {"model": "gpt-6.1-sol", "effort": "medium"},
+        {"model": "gpt-6.1-sol", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "low"},
+        {"model": "claude-sonnet-5-5", "effort": "medium"}
+      ],
+      "subagent": [
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "low"},
+        {"model": "claude-sonnet-5-5", "effort": "medium"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6-luna", "effort": "medium"},
+        {"model": "claude-haiku-5-5", "effort": "medium"}
+      ]
+    },
+    "openai-codex": {
+      "orchestrationWorker": [
+        {"model": "gpt-6.1-sol", "effort": "medium"},
+        {"model": "gpt-6.1-sol", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "low"}
+      ],
+      "subagent": [
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "low"},
+        {"model": "gpt-6.1-sol", "effort": "medium"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6-luna", "effort": "medium"},
+        {"model": "gpt-6.1-sol", "effort": "low"}
+      ]
+    },
+    "gemini": {
+      "orchestrationWorker": [
+        {"model": "gemini-4-argon", "effort": "medium"},
+        {"model": "gemini-4-argon", "effort": "high"},
+        {"model": "gemini-4-argon", "effort": "low"}
+      ],
+      "subagent": [
+        {"model": "gemini-4-argon", "effort": "medium"},
+        {"model": "gemini-3.8-flash", "effort": "medium"},
+        {"model": "gemini-3.8-flash", "effort": "high"},
+        {"model": "gemini-4-argon", "effort": "low"}
+      ],
+      "subagentSimple": [
+        {"model": "gemini-3.8-flash", "effort": "low"},
+        {"model": "gemini-3.8-flash", "effort": "medium"},
+        {"model": "gemini-4-argon", "effort": "low"}
+      ]
+    }
+  },
+  "cautions": [
+    "GPT-6 Luna falls off at low (Index 21.5, against 30 at medium); never offer Luna under medium."
+  ]
+}

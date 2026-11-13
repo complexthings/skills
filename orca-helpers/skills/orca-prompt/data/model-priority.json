@@ -1,0 +1,88 @@
+{
+  "_source": "Seeded from Artificial Analysis Intelligence Index vs. Cost per Task, 20 Oct '26 (.agents/references/), values read off log-scale charts, so approximate. Ranked on capability per dollar, not raw capability: each slot keeps the entries that clear its Index floor (orchestrationWorker 47, subagent 40, subagentSimple 29) and orders them by Index per dollar, dominated entries last. Entries noted `unscored` have no chart data and rank below every scored one. `gemini-4-argon` is unconfirmed: `agy models` does not list it yet. Rewritten 2026-10-21.",
+  "harnessOrder": ["claude", "pi", "opencode", "copilot", "codex", "agy"],
+  "modelOrder": {
+    "anthropic": {
+      "orchestrationWorker": [
+        {"model": "claude-opus-5-5", "effort": "medium"},
+        {"model": "claude-opus-5-5", "effort": "high"},
+        {"model": "claude-sonnet-5-5", "effort": "xhigh"},
+        {"model": "claude-opus-5-5", "effort": "xhigh"}
+      ],
+      "subagent": [
+        {"model": "claude-haiku-5-5", "effort": "xhigh"},
+        {"model": "claude-opus-5-5", "effort": "low"},
+        {"model": "claude-sonnet-5-5", "effort": "high"}
+      ],
+      "subagentSimple": [
+        {"model": "claude-haiku-5-5", "effort": "medium"},
+        {"model": "claude-haiku-5-5", "effort": "high"},
+        {"model": "claude-haiku-5-5", "effort": "low"},
+        {"model": "claude-opus-5-5", "effort": "low"}
+      ]
+    },
+    "github-copilot": {
+      "orchestrationWorker": [
+        {"model": "gpt-6.1-sol", "effort": "medium"},
+        {"model": "gpt-6.1-sol", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "xhigh"},
+        {"model": "claude-opus-5-5", "effort": "medium"},
+        {"model": "gemini-4-argon", "effort": "high"}
+      ],
+      "subagent": [
+        {"model": "gpt-6.1-sol", "effort": "low"},
+        {"model": "claude-haiku-5-5", "effort": "xhigh"},
+        {"model": "claude-sonnet-5-5", "effort": "high"},
+        {"model": "gemini-3.8-flash", "effort": "high"},
+        {"model": "grok-4.7", "effort": "low"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-6-luna", "effort": "medium"},
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "claude-haiku-5-5", "effort": "medium"},
+        {"model": "kimi-k3", "effort": "low"}
+      ]
+    },
+    "openai-codex": {
+      "orchestrationWorker": [
+        {"model": "gpt-6.1-sol", "effort": "medium"},
+        {"model": "gpt-6.1-sol", "effort": "high"},
+        {"model": "gpt-6.1-sol", "effort": "xhigh"},
+        {"model": "gpt-6.1-sol", "effort": "max"}
+      ],
+      "subagent": [
+        {"model": "gpt-6.1-sol", "effort": "low"},
+        {"model": "gpt-6-luna", "effort": "max"}
+      ],
+      "subagentSimple": [
+        {"model": "gpt-6-luna", "effort": "medium"},
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6-luna", "effort": "xhigh"},
+        {"model": "gpt-6.1-sol", "effort": "low"}
+      ]
+    },
+    "gemini": {
+      "orchestrationWorker": [
+        {"model": "gemini-4-argon", "effort": "high"},
+        {"model": "gemini-4-argon", "effort": "medium", "note": "unscored"},
+        {"model": "gemini-4-argon", "effort": "low", "note": "unscored"}
+      ],
+      "subagent": [
+        {"model": "gemini-3.8-flash", "effort": "high"},
+        {"model": "gemini-4-argon", "effort": "high"},
+        {"model": "gemini-4-argon", "effort": "medium", "note": "unscored"}
+      ],
+      "subagentSimple": [
+        {"model": "gemini-3.8-flash", "effort": "medium"},
+        {"model": "gemini-3.8-flash", "effort": "high"},
+        {"model": "gemini-3.8-flash", "effort": "low", "note": "unscored"}
+      ]
+    }
+  },
+  "cautions": [
+    "GPT-6 Luna falls off at low (Index 21.5, against 30 at medium); never offer Luna under medium.",
+    "Claude Sonnet 5.5 is dominated at low and medium by Claude Haiku 5.5 xhigh (41.2 at $0.13), and at xhigh by Claude Opus 5.5 high (53.5 at $1.85); only Sonnet high holds its place.",
+    "Grok 4.7 xhigh (46.4) costs a third more than high (46.3) for the same score; do not raise its effort past high.",
+    "Gemini 4 Argon medium and low, Gemini 3.8 Flash low and Grok 4.7 medium have no chart data; treat them as unscored."
+  ]
+}

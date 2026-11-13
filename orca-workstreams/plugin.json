@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "orca-workstreams",
+  "version": "0.1.0",
+  "description": "Plan and run Orca Workstreams across coding agents.",
+  "author": { "name": "complexthings" },
+  "repository": "https://github.com/complexthings/skills",
+  "license": "MIT"
+}
